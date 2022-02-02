@@ -1,16 +1,16 @@
 import pandas as pd
+import os
 from sklearn.ensemble import RandomForestClassifier
 
 
 class mlService:
-    def predict(self, input):
-        user_data = pd.read_csv("../datasets/user.csv")
+    def predict(self, stats):
+        dir = os.path.dirname(__file__)
+        filename = os.path.join(dir, '../datasets/user.csv')
+        user_data = pd.read_csv(filename)
         x = user_data.drop(columns=['out'])
         y = user_data['out']
         model = RandomForestClassifier()
         model.fit(x, y)
-        predictions_proba = model.predict_proba(input)
-        predictions = model.predict(input)
-        print(predictions)
-        print(predictions_proba)
+        predictions_proba = model.predict_proba([stats])
         return predictions_proba
