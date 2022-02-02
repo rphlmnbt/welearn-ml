@@ -3,7 +3,7 @@ import os
 from sklearn.ensemble import RandomForestClassifier
 
 
-class mlService:
+class MLService:
     def predict(self, stats):
         dir = os.path.dirname(__file__)
         filename = os.path.join(dir, '../datasets/user.csv')

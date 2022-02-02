@@ -1,11 +1,11 @@
 from flask_restful import Resource, reqparse, request
 from flask import json
-from services.mlService import mlService
+from services.mlService import MLService
 
 
 class MLController(Resource):
     def post(self):
-        ml = mlService()
+        ml = MLService()
         json = request.json
 
         stats_arr = json["stats"]
