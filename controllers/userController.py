@@ -4,10 +4,10 @@ from services.userService import UserService
 
 
 @app.route('/user', methods=['POST'])
-def post():
+def createDataset():
     user = UserService()
     json = request.json
     stats_arr = json["stats"]
     user_id = str(json["userID"])
     msg = user.create(user_id, stats_arr)
-    return {"response" : msg }
+    return {"response" : msg }, 200
