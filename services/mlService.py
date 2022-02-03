@@ -27,7 +27,7 @@ class MLService:
         q5 = stats_arr[4]
         dir = os.path.dirname(__file__)
         filename = os.path.join(dir, '../datasets/user-' + user_id + '.csv')
-        with open(filename, 'w', newline="", encoding='utf-8') as file:
+        with open(filename, 'a', newline="", encoding='utf-8') as file:
             writer = csv.writer(file)
             writer.writerow([q1, q2, q3, q4, q5, out])
         success_msg = "Data Added!"

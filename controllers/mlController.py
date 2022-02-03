@@ -13,3 +13,13 @@ def predict():
     proba_true = proba[0][1]
     return {'probability': proba_true}, 200  # return data with 200 OK
 
+
+@app.route('/ml/add', methods=['POST'])
+def add():
+    ml = MLService()
+    json = request.json
+    stats_arr = json["stats"]
+    user_id = str(json["userID"])
+    out = json["out"]
+    msg = ml.add(stats_arr, user_id, out)
+    return {'response': msg}, 200
