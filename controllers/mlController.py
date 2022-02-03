@@ -7,10 +7,9 @@ class MLController(Resource):
     def post(self):
         ml = MLService()
         json = request.json
-
         stats_arr = json["stats"]
-
-        proba = ml.predict(stats_arr)
+        user_id = str(json["userID"])
+        proba = ml.predict(stats_arr, user_id)
         proba_true = proba[0][1]
         return {'probability': proba_true}, 200  # return data with 200 OK
 
