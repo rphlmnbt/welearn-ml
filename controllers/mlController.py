@@ -19,7 +19,7 @@ def add():
     ml = MLService()
     json = request.json
     stats_arr = json["stats"]
-    user_id = str(json["userID"])
+    user_id = json["userID"]
     out = json["out"]
     msg = ml.add(stats_arr, user_id, out)
     return {'response': msg}, 200
