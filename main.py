@@ -11,4 +11,4 @@ import controllers.mlController
 
 if __name__ == "__main__":
     # start up api
-    app.run(port=8080, debug=True)
+    app.run(port=8081, debug=True)
