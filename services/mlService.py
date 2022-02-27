@@ -10,12 +10,12 @@ class MLService:
         filename = os.path.join(dir, '../datasets/user-'+user_id+'.csv')
         user_data = pd.read_csv(filename, sep=',')
         x = user_data.drop(columns=['out'])
-        print(x)
+        # print(x)
         y = user_data['out']
-        print(y)
+        # print(y)
         model = RandomForestClassifier()
         model.fit(x, y)
-        print(model.predict([stats]))
+        # print(model.predict([stats]))
         predictions_proba = model.predict_proba([stats])
         return predictions_proba
 
