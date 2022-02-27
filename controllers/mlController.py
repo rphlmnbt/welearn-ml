@@ -31,16 +31,16 @@ def add():
 @app.route('/ml/batch', methods=['POST'])
 def predictbatch():
     ml = MLService()
-    studyPartners = request.json
+    data = request.json
+    uuid_user = data["uuid_user"]
+    studyPartners = data["studyPartners"]
     size = len(studyPartners)
-    # ratedStudyPartners = np.empty(size, dtype=object)
-    ratedStudyPartners = []
     ratedStudyPartners = [0 for i in range(size)]
     i = 0
     for studyPartner in studyPartners:
         stats_arr = studyPartner["stats"]
         user_id = str(studyPartner["uuid_user"])
-        proba = ml.predict(stats_arr, user_id)
+        proba = ml.predict(stats_arr, uuid_user)
         proba_true = proba[0][1]
         ratedStudyPartner = {
             "uuid_user": user_id,
@@ -50,8 +50,4 @@ def predictbatch():
         ratedStudyPartners[i] = ratedStudyPartner
         i += 1
     response = json.dumps(ratedStudyPartners)
-    # stats_arr = json["stats"]
-    # user_id = json["userID"]
-    # out = json["out"]
-    # msg = ml.add(stats_arr, user_id, out)
     return {"batch" : ratedStudyPartners}, 200
