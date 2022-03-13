@@ -10,9 +10,28 @@ class MLService:
         filename = os.path.join(dir, '../datasets/user-'+user_id+'.csv')
         user_data = pd.read_csv(filename, sep=',')
         x = user_data.drop(columns=['out'])
-        # print(x)
+        print(x)
         y = user_data['out']
-        # print(y)
+        print(y)
+        model = RandomForestClassifier()
+        model.fit(x, y)
+        # print(model.predict([stats]))
+        predictions_proba = model.predict_proba([stats])
+        return predictions_proba
+
+    def group_predict(self, stats, user_ids):
+        dir = os.path.dirname(__file__)
+        merged_data = pd.DataFrame(columns=['q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'out'])
+        for user_id in user_ids:
+            filename = os.path.join(dir, '../datasets/user-'+user_id+'.csv')
+            user_data = pd.read_csv(filename, sep=',')
+            merged_data = merged_data.append(user_data, ignore_index=True)
+        print(merged_data)
+        x = merged_data.drop(columns=['out'])
+        print(x)
+        y = merged_data['out']
+        y = y.astype('bool')
+        print(y)
         model = RandomForestClassifier()
         model.fit(x, y)
         # print(model.predict([stats]))

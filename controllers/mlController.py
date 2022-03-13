@@ -51,3 +51,27 @@ def predictbatch():
         i += 1
     response = json.dumps(ratedStudyPartners)
     return {"batch" : ratedStudyPartners}, 200
+
+@app.route('/ml/batch/group', methods=['POST'])
+def predictbatchgroup():
+    ml = MLService()
+    data = request.json
+    uuid_users = data["uuid_users"]
+    studyPartners = data["studyPartners"]
+    size = len(studyPartners)
+    ratedStudyPartners = [0 for i in range(size)]
+    i = 0
+    for studyPartner in studyPartners:
+        stats_arr = studyPartner["stats"]
+        user_id = str(studyPartner["uuid_user"])
+        proba = ml.group_predict(stats_arr, uuid_users)
+        proba_true = proba[0][1]
+        ratedStudyPartner = {
+            "uuid_user": user_id,
+            "stats":  stats_arr,
+            "probability": proba_true
+        }
+        ratedStudyPartners[i] = ratedStudyPartner
+        i += 1
+    response = json.dumps(ratedStudyPartners)
+    return {"batch" : ratedStudyPartners}, 200
