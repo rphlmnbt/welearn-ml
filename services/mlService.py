@@ -26,7 +26,7 @@ class MLService:
             filename = os.path.join(dir, '../datasets/user-'+user_id+'.csv')
             user_data = pd.read_csv(filename, sep=',')
             merged_data = merged_data.append(user_data, ignore_index=True)
-        print(merged_data)
+        # print(merged_data)
         x = merged_data.drop(columns=['out'])
         # print(x)
         y = merged_data['out']
