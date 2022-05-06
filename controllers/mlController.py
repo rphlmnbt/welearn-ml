@@ -42,6 +42,9 @@ def predictbatch():
         user_id = str(studyPartner["uuid_user"])
         proba = ml.predict(stats_arr, uuid_user)
         proba_true = proba[0][1]
+        print(user_id)
+        print(stats_arr)
+        print(proba_true)
         ratedStudyPartner = {
             "uuid_user": user_id,
             "stats":  stats_arr,
@@ -66,6 +69,9 @@ def predictbatchgroup():
         user_id = str(studyPartner["uuid_user"])
         proba = ml.group_predict(stats_arr, uuid_users)
         proba_true = proba[0][1]
+        print(user_id)
+        print(stats_arr)
+        print(proba_true)
         ratedStudyPartner = {
             "uuid_user": user_id,
             "stats":  stats_arr,
